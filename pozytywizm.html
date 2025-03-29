@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz o Pozytywizmie</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .quiz-container { max-width: 600px; margin: auto; }
+        .question { font-weight: bold; margin: 15px 0; }
+        .options button { display: block; width: 100%; margin: 5px 0; padding: 10px; cursor: pointer; }
+        .correct { background-color: lightgreen; }
+        .incorrect { background-color: lightcoral; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Quiz o Pozytywizmie</h2>
+        <div id="quiz"></div>
+        <button onclick="restartQuiz()">Restart</button>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "Kiedy w Polsce trwał okres pozytywizmu?", options: ["1800-1830", "1864-1890", "1900-1920"], answer: 1 },
+            { question: "Jak nazywa się filozof, który stworzył podstawy pozytywizmu?", options: ["Karol Darwin", "August Comte", "Immanuel Kant"], answer: 1 },
+            { question: "Która z poniższych koncepcji NIE jest związana z pozytywizmem?", options: ["Scjentyzm", "Mistycyzm", "Praca organiczna"], answer: 1 },
+            { question: "Jaki gatunek literacki dominował w literaturze pozytywizmu?", options: ["Ballada", "Powieść realistyczna", "Epos rycerski"], answer: 1 },
+            { question: "Który z pisarzy pozytywizmu napisał \"Lalkę\"?", options: ["Henryk Sienkiewicz", "Bolesław Prus", "Eliza Orzeszkowa"], answer: 1 },
+            { question: "Pozytywiści uważali, że literatura powinna tylko bawić czytelnika.", options: ["Prawda", "Fałsz"], answer: 1 },
+            { question: "Realizm był jedną z głównych cech literatury pozytywistycznej.", options: ["Prawda", "Fałsz"], answer: 0 },
+            { question: "Pozytywizm popierał mistyczne i romantyczne spojrzenie na świat.", options: ["Prawda", "Fałsz"], answer: 1 },
+            { question: "Praca u podstaw oznaczała rozwój nauki i gospodarki bez uwzględniania warstw najbiedniejszych.", options: ["Prawda", "Fałsz"], answer: 1 },
+            { question: "Pozytywiści dążyli do asymilacji mniejszości narodowych, np. Żydów.", options: ["Prawda", "Fałsz"], answer: 0 },
+            { question: "Wyjaśnij pojęcie 'pracy organicznej'.", options: ["Współpraca wszystkich warstw społeczeństwa dla wspólnego dobra", "Działania związane z uprawą roli", "Organizowanie strajków robotniczych"], answer: 0 },
+            { question: "W jaki sposób pozytywiści widzieli rolę nauki w społeczeństwie?", options: ["Jako narzędzie postępu i rozwoju", "Jako niepotrzebny element tradycyjnego społeczeństwa", "Jako dziedzinę tylko dla elit"], answer: 0 },
+            { question: "Jakie różnice można zauważyć między romantyzmem a pozytywizmem?", options: ["Romantyzm skupiał się na uczuciach, pozytywizm na rozumie", "Romantyzm odrzucał naukę, pozytywizm ją promował", "Romantyzm cenił indywidualizm, pozytywizm wspólne dobro"], answer: 0 },
+            { question: "Jakie były główne problemy społeczne podejmowane przez pozytywistów w literaturze?", options: ["Ubóstwo i nierówności społeczne", "Problemy fantastycznych światów", "Wojny napoleońskie"], answer: 0 }
+        ];
+
+        const quizContainer = document.getElementById("quiz");
+
+        function loadQuiz() {
+            quizContainer.innerHTML = "";
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question");
+                questionDiv.innerText = q.question;
+                quizContainer.appendChild(questionDiv);
+
+                const optionsDiv = document.createElement("div");
+                optionsDiv.classList.add("options");
+                q.options.forEach((option, i) => {
+                    const button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(button, i === q.answer);
+                    optionsDiv.appendChild(button);
+                });
+                quizContainer.appendChild(optionsDiv);
+            });
+        }
+
+        function checkAnswer(button, isCorrect) {
+            button.classList.add(isCorrect ? "correct" : "incorrect");
+            setTimeout(() => {
+                button.classList.remove("correct", "incorrect");
+            }, 1000);
+        }
+
+        function restartQuiz() {
+            loadQuiz();
+        }
+
+        loadQuiz();
+    </script>
+</body>
+</html>
